@@ -615,10 +615,8 @@
     // PŘIHLÁŠENÍ PŘES MICROSOFT
     async function handleMicrosoftLogin() {
       const subdomain = document.getElementById('schoolSubdomain').value.trim() || 'gymbk';
-      showToast('Otevírám Microsoft SSO přihlášení...');
-      
       // Otevře oficiální přihlašovací okno Microsoftu pro EduPage
-      const msUrl = `https://${subdomain}.edupage.org/login/edupage?msLogin=1`;
+      const msUrl = `https://${subdomain}.edupage.org/login/?cmd=oauthLogin&a=microsoftsignin`;
       window.open(msUrl, '_blank', 'width=750,height=700');
 
       // Načte reálná data ze serveru
