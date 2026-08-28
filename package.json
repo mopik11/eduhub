@@ -1,0 +1,12 @@
+{
+  "name": "eduhub",
+  "version": "1.0.0",
+  "description": "EduHub — Modern Educational Learning Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["education", "courses", "hub", "bento-grid", "learning"],
+  "author": "mopik11",
+  "license": "MIT"
+}
