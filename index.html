@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduHub — Školní Portál & Dashboard</title>
-  <meta name="description" content="Moderní školní portál s přihlášením přes Microsoft, rozvrhem hodin, známkami a přehledem pro studenty." />
+  <title>EduHub — Školní Portál Gymnázium Blansko</title>
+  <meta name="description" content="Informační školní hub pro studenty Gymnázia Blansko s reálnými daty z EduPage." />
 
   <!-- Fonts: Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,44 +30,21 @@
               300: '#A5B4FC',
               400: '#818CF8',
               500: '#6366F1',
-              600: '#4F46E5', // Primary brand
+              600: '#4F46E5',
               700: '#4338CA',
               800: '#3730A3',
               900: '#312E81',
-            },
-            google: {
-              blue: '#1a73e8',
-              blueDark: '#1557b0',
-              blueLight: '#e8f0fe',
-              green: '#1e8e3e',
-              greenLight: '#e6f4ea',
-              yellow: '#f9ab00',
-              yellowLight: '#fef7e0',
-              red: '#d93025',
-              redLight: '#fce8e6',
-              surface: '#f8f9fa',
-              border: '#dadce0',
             }
-          },
-          boxShadow: {
-            'card': '0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04)',
-            'card-hover': '0 16px 36px -4px rgba(79, 70, 229, 0.12), 0 8px 16px -2px rgba(15, 23, 42, 0.06)',
-            'bento': '0 10px 30px -5px rgba(0, 0, 0, 0.05)',
           }
         }
       }
     }
   </script>
 
-  <!-- SheetJS pro generování Excelu přímo v prohlížeči -->
+  <!-- SheetJS pro export do Excelu -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
   <style>
-    .bg-mesh-gradient {
-      background: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-                  radial-gradient(at 100% 0%, rgba(192, 132, 252, 0.15) 0px, transparent 50%),
-                  radial-gradient(at 50% 100%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
-    }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
@@ -76,133 +53,89 @@
 <body class="bg-[#F8F9FA] text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-100 selection:text-brand-900">
 
   <!-- ========================================================================= -->
-  <!-- 1. OBRAZOVKA PŘIHLÁŠENÍ (LOGIN VIEW)                                      -->
+  <!-- 1. PŘIHLAŠOVACÍ OBRAZOVKA (LOGIN VIEW)                                    -->
   <!-- ========================================================================= -->
-  <div id="loginView" class="min-h-screen flex flex-col justify-between bg-mesh-gradient">
+  <div id="loginView" class="min-h-screen flex flex-col justify-between p-4 sm:p-8 bg-gradient-to-b from-slate-50 to-indigo-50/30">
     
-    <!-- Horní lišta přihlašovací stránky -->
-    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
+    <!-- Horní lišta přihlášení -->
+    <div class="max-w-6xl w-full mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-brand-500/20">
+        <div class="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-brand-500/20">
+          E
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-slate-900">Edu<span class="text-brand-600">Hub</span></span>
+          <span class="text-xs text-slate-400 font-semibold block leading-none">Gymnázium Blansko</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2 text-xs font-semibold text-slate-500 bg-white border border-slate-200 rounded-full px-3.5 py-1.5 shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span>gymbk.edupage.org</span>
+      </div>
+    </div>
+
+    <!-- Centrální přihlašovací karta -->
+    <div class="max-w-md w-full mx-auto my-12 bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-10 space-y-6">
+      <div class="text-center space-y-2">
+        <div class="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto text-2xl font-bold">
           🎓
         </div>
-        <div class="flex flex-col">
-          <span class="text-xl font-bold tracking-tight text-slate-900">Edu<span class="text-brand-600">Hub</span></span>
-          <span class="text-[10px] font-semibold text-slate-500 tracking-wider uppercase">Školní informační portál</span>
-        </div>
+        <h1 class="text-2xl font-extrabold text-slate-900">Školní informační portál</h1>
+        <p class="text-xs text-slate-500 font-body">Přihlaste se přes školní Microsoft účet pro načtení rozvrhu, známek a oznámení z EduPage.</p>
       </div>
-      <div class="text-xs font-semibold text-slate-500 bg-white/80 border border-slate-200/80 rounded-full px-3 py-1.5 backdrop-blur-sm shadow-xs">
-        Gymnázium Blansko • Gymbk
+
+      <!-- Chybová hláška přihlášení (pokud nastane) -->
+      <div id="loginErrorBox" class="hidden p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium space-y-1">
+        <div class="font-bold flex items-center space-x-1.5">
+          <span>⚠️</span>
+          <span id="loginErrorTitle">Nelze načíst data ze serveru</span>
+        </div>
+        <p id="loginErrorDesc">Zkontrolujte, zda na serveru běží proces na portu 3005.</p>
       </div>
-    </header>
 
-    <!-- Hlavní přihlašovací karta -->
-    <main class="flex-1 flex items-center justify-center px-4 py-8">
-      <div class="w-full max-w-md bg-white rounded-3xl border border-slate-200/80 shadow-2xl p-7 sm:p-9 space-y-6 relative overflow-hidden">
-        
-        <!-- Ambientní záře -->
-        <div class="absolute -top-20 -right-20 w-48 h-48 bg-brand-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="space-y-4 pt-2">
+        <!-- HLAVNÍ TLAČÍTKO: PŘIHLÁŠENÍ PŘES MICROSOFT -->
+        <button 
+          id="btnMsLogin"
+          onclick="handleMicrosoftLogin()" 
+          class="w-full flex items-center justify-center space-x-3 bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-brand-500 text-slate-800 px-5 py-3.5 rounded-2xl font-bold text-sm shadow-xs transition duration-200 active:scale-[0.99] group"
+        >
+          <!-- Oficiální Microsoft logo -->
+          <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 21 21">
+            <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
+            <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
+            <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
+            <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
+          </svg>
+          <span class="group-hover:text-brand-600 transition">Přihlásit se přes Microsoft</span>
+        </button>
 
-        <div class="text-center space-y-2">
-          <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 border border-brand-100 text-2xl mx-auto shadow-inner mb-1">
-            🔐
-          </div>
-          <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Přihlášení do EduHubu</h1>
-          <p class="text-xs text-slate-500 font-body">Získejte okamžitý přístup k rozvrhu, známkám, úkolům a suplování.</p>
+        <div class="flex items-center my-3">
+          <div class="flex-grow border-t border-slate-200"></div>
+          <span class="flex-shrink mx-3 text-[11px] font-bold uppercase text-slate-400">nebo</span>
+          <div class="flex-grow border-t border-slate-200"></div>
         </div>
 
-        <!-- Výběr školy -->
-        <div class="space-y-1.5">
-          <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">EduPage Škola</label>
-          <div class="flex items-center space-x-2">
-            <div class="relative flex-1">
-              <input 
-                type="text" 
-                id="schoolSubdomain" 
-                value="gymbk" 
-                placeholder="např. gymbk" 
-                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:bg-white focus:outline-none focus:border-brand-500 transition"
-              />
-            </div>
-            <span class="text-xs font-semibold text-slate-400">.edupage.org</span>
-          </div>
-        </div>
-
-        <!-- HLAVNÍ TLAČÍTKO: PŘIHLÁSIT SE PŘES MICROSOFT SSO -->
-        <div class="space-y-3 pt-2">
-          <button 
-            type="button" 
-            onclick="handleMicrosoftLogin()" 
-            class="w-full group flex items-center justify-center space-x-3 bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-brand-400 text-slate-800 px-5 py-3.5 rounded-2xl font-bold text-sm shadow-card hover:shadow-card-hover transition-all duration-200 active:scale-[0.99]"
-          >
-            <!-- Oficiální Microsoft logo ikona -->
-            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 21 21">
-              <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
-              <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
-              <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
-              <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
-            </svg>
-            <span>Přihlásit se přes Microsoft</span>
-          </button>
-          
-          <div class="flex items-center my-3">
-            <div class="flex-grow border-t border-slate-200"></div>
-            <span class="flex-shrink mx-3 text-[11px] font-bold uppercase text-slate-400 tracking-wider">nebo EduPage účtem</span>
-            <div class="flex-grow border-t border-slate-200"></div>
-          </div>
-
-          <!-- Manuální EduPage / Session login formulář -->
-          <div class="space-y-3">
-            <div>
-              <input 
-                type="text" 
-                id="loginUsername" 
-                placeholder="EduPage jméno / email" 
-                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-brand-500 transition"
-              />
-            </div>
-            <div>
-              <input 
-                type="password" 
-                id="loginPassword" 
-                placeholder="EduPage heslo" 
-                class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:border-brand-500 transition"
-              />
-            </div>
-            <button 
-              type="button" 
-              onclick="handleCredentialsLogin()" 
-              class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-xl text-sm shadow-md shadow-brand-600/20 transition duration-200"
-            >
-              Vstoupit do portálu
-            </button>
-          </div>
-        </div>
-
-        <!-- Rychlý náhled / Demo přístup pro GitHub Pages -->
-        <div class="pt-2 text-center border-t border-slate-100">
-          <button 
-            type="button" 
-            onclick="enterDemoMode()" 
-            class="text-xs font-bold text-brand-600 hover:text-brand-800 hover:underline transition"
-          >
-            ⚡ Spustit rychlý náhled studenta (Matěj Pačl, Gymbk) →
-          </button>
-        </div>
-
-        <!-- Bezpečnostní certifikace -->
-        <div class="flex items-center justify-center space-x-2 text-[11px] text-slate-400 font-medium pt-1">
-          <svg class="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-          <span>End-to-End šifrováno. Údaje se neukládají veřejně.</span>
-        </div>
-
+        <!-- Tlačítko pro přímé načtení dat ze serveru -->
+        <button 
+          onclick="loadServerDataDirectly()" 
+          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-2xl text-xs transition duration-200 shadow-xs flex items-center justify-center space-x-2"
+        >
+          <span>⚡ Načíst data z lokálního serveru (Port 3005)</span>
+        </button>
       </div>
-    </main>
 
-    <!-- Jednoduchá patička přihlašovací obrazovky -->
-    <footer class="py-4 text-center text-xs text-slate-400">
-      © 2026 EduHub • Určeno pro studenty a pedagogy • Gymbk
-    </footer>
+      <div class="pt-4 border-t border-slate-100 text-center">
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Při kliknutí na Microsoft přihlášení se otevře oficiální portál <b>login.microsoftonline.com</b> a data se synchronizují s vaším účtem na Gymnáziu Blansko.
+        </p>
+      </div>
+    </div>
+
+    <!-- Patička -->
+    <div class="text-center text-xs text-slate-400">
+      © 2026 EduHub • Určeno výhradně pro studenty a vyučující Gymnázia Blansko
+    </div>
 
   </div>
 
@@ -211,42 +144,45 @@
   <!-- ========================================================================= -->
   <div id="dashboardView" class="hidden min-h-screen flex flex-col">
     
-    <!-- Sticky Horní Navigace Dashboardu -->
-    <header class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <!-- Horní Lišta (Header) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-xs">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-3">
         
-        <!-- Logo & Profil -->
+        <!-- Logo & Profil studenta -->
         <div class="flex items-center space-x-3.5">
-          <div class="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-brand-500/20">
+          <div class="w-10 h-10 rounded-2xl bg-brand-600 flex items-center justify-center text-white font-extrabold text-xl shadow-sm shadow-brand-500/30">
             E
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h1 id="dashStudentName" class="text-base sm:text-lg font-bold text-slate-900">Matěj Pačl</h1>
-              <span id="dashSchoolBadge" class="bg-brand-50 text-brand-700 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-brand-200/60">
-                gymbk.edupage.org
+              <h1 id="headerStudentName" class="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">Student</h1>
+              <span id="headerClassBadge" class="bg-brand-50 text-brand-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-brand-200">
+                Třída
               </span>
             </div>
-            <p class="text-xs text-slate-500 font-medium">Třída: <span id="dashClassName" class="font-bold text-slate-700">Oktáva A</span></p>
+            <p id="headerSchoolInfo" class="text-xs text-slate-500 font-medium">Gymnázium Blansko • gymbk.edupage.org</p>
           </div>
         </div>
 
-        <!-- Akční tlačítka v liště -->
+        <!-- Akční tlačítka vpravo -->
         <div class="flex items-center space-x-2 sm:space-x-3">
-          <!-- Tlačítko pro živou synchronizaci -->
+          
+          <!-- Tlačítko synchronizace z EduPage -->
           <button 
-            onclick="refreshFromEdupage()" 
-            class="inline-flex items-center space-x-1.5 bg-brand-50 hover:bg-brand-100 border border-brand-200 text-brand-700 text-xs sm:text-sm font-bold px-3 py-2 rounded-xl transition shadow-xs"
+            id="btnSync"
+            onclick="triggerLiveSync()" 
+            class="inline-flex items-center space-x-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs sm:text-sm font-bold px-3 py-2 rounded-xl transition shadow-xs"
             title="Aktualizovat nejnovější data z EduPage"
           >
-            <span>🔄 Obnovit z EduPage</span>
+            <span id="syncSpinner" class="hidden animate-spin">🔄</span>
+            <span id="syncText">🔄 Obnovit z EduPage</span>
           </button>
 
-          <!-- Tlačítko na export do Excelu -->
+          <!-- Tlačítko exportu do Excelu -->
           <button 
-            onclick="exportDashboardExcel()" 
-            class="inline-flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold px-3 py-2 rounded-xl transition shadow-xs"
-            title="Stáhnout kompletní sešit se známkami a rozvrhem"
+            onclick="exportToExcel()" 
+            class="inline-flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold px-3.5 py-2 rounded-xl transition shadow-xs"
+            title="Stáhnout sešit se známkami a rozvrhem"
           >
             <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             <span class="hidden sm:inline">Stáhnout Excel</span>
@@ -254,8 +190,9 @@
 
           <!-- Tlačítko odhlášení -->
           <button 
-            onclick="handleLogout()" 
-            class="inline-flex items-center space-x-1.5 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 border border-slate-200 text-slate-700 text-xs sm:text-sm font-semibold px-3 py-2 rounded-xl transition shadow-xs"
+            onclick="logout()" 
+            class="inline-flex items-center space-x-1 bg-white hover:bg-rose-50 hover:text-rose-600 border border-slate-200 text-slate-600 text-xs sm:text-sm font-semibold px-3 py-2 rounded-xl transition shadow-xs"
+            title="Odhlásit se z EduHubu"
           >
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
             <span class="hidden sm:inline">Odhlásit</span>
@@ -264,10 +201,10 @@
 
       </div>
 
-      <!-- Navigační záložky Dashboardu -->
+      <!-- Navigační záložky dashboardu -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-100 flex space-x-2 sm:space-x-4 overflow-x-auto no-scrollbar py-2 text-xs sm:text-sm font-bold">
         <button onclick="switchTab('timetable')" id="tabBtn-timetable" class="tab-btn active px-4 py-2 rounded-xl bg-brand-600 text-white shadow-xs">
-          🗓️ Rozvrh hodin
+          📅 Rozvrh hodin
         </button>
         <button onclick="switchTab('grades')" id="tabBtn-grades" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
           📊 Známky & Průměry
@@ -276,104 +213,126 @@
           📝 Úkoly a písemky
         </button>
         <button onclick="switchTab('notices')" id="tabBtn-notices" class="tab-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
-          📬 Oznámení & Zprávy
+          📬 Školní oznámení (<span id="tabNoticesCount">0</span>)
         </button>
       </div>
     </header>
 
-    <!-- Hlavní obsah Dashboardu -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      
-      <!-- BENTO SUMMARY METRICS (Přehled v Bento Boxu) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <!-- Hlavní obsah dashboardu -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+      <!-- Chybový stav na dashboardu (pokud selže načtení) -->
+      <div id="dashErrorBox" class="hidden p-6 rounded-3xl bg-rose-50 border border-rose-200 text-rose-800 space-y-3 text-center">
+        <div class="text-3xl">⚠️</div>
+        <h2 class="text-lg font-bold">Nepodařilo se načíst živá data ze školního serveru</h2>
+        <p class="text-xs text-rose-600 max-w-lg mx-auto leading-relaxed">
+          Server na portu 3005 neodpovídá nebo soubor s daty ještě nebyl vygenerován. Spusťte na vašem serveru synchronizaci:
+          <code class="block mt-1.5 p-2 bg-white rounded-xl border border-rose-200 font-mono text-[11px] text-slate-800">
+            python3 sync_live.py
+          </code>
+        </p>
+        <button onclick="loadServerDataDirectly()" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-xs shadow-xs transition">
+          Zkusit znovu načíst data 🔄
+        </button>
+      </div>
+
+      <!-- Přehledové Bento Karty -->
+      <div id="dashMetricsGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Bento 1: Studijní průměr -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card hover:shadow-card-hover transition duration-300">
-          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
-            <span>Celkový průměr</span>
-            <span class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base">📈</span>
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs">
+          <div class="flex items-center justify-between text-xs font-bold uppercase text-slate-400">
+            <span>Vážený průměr</span>
+            <span class="text-emerald-600 font-bold">📈</span>
           </div>
-          <div class="mt-4 flex items-baseline space-x-2">
-            <span id="statAverage" class="text-3xl font-extrabold text-slate-900">1.38</span>
-            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Výborný prospěch</span>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span id="metricAverage" class="text-2xl sm:text-3xl font-extrabold text-slate-900">-</span>
+            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Výborný</span>
           </div>
-          <p class="text-xs text-slate-400 mt-2">Vypočteno ze všech zapsaných známek</p>
+          <p class="text-[11px] text-slate-400 mt-1.5">Vypočteno ze zapsaných známek</p>
         </div>
 
-        <!-- Bento 2: Tento týden výuka -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card hover:shadow-card-hover transition duration-300">
-          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
-            <span>Rozvrh hodin</span>
-            <span class="w-8 h-8 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-base">⏰</span>
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs">
+          <div class="flex items-center justify-between text-xs font-bold uppercase text-slate-400">
+            <span>Týdenní výuka</span>
+            <span class="text-brand-600 font-bold">⏰</span>
           </div>
-          <div class="mt-4 flex items-baseline space-x-2">
-            <span id="statLessonsCount" class="text-3xl font-extrabold text-slate-900">25</span>
-            <span class="text-xs font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">Hodin týdně</span>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span id="metricLessons" class="text-2xl sm:text-3xl font-extrabold text-slate-900">25</span>
+            <span class="text-[11px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">Hodin týdně</span>
           </div>
-          <p class="text-xs text-slate-400 mt-2">Aktuální stav včetně suplování</p>
+          <p class="text-[11px] text-slate-400 mt-1.5">Plný stálý rozvrh hodin</p>
         </div>
 
-        <!-- Bento 3: Nadcházející písemky -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card hover:shadow-card-hover transition duration-300">
-          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
-            <span>Úkoly a písemky</span>
-            <span class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-base">📝</span>
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs">
+          <div class="flex items-center justify-between text-xs font-bold uppercase text-slate-400">
+            <span>Předměty</span>
+            <span class="text-blue-600 font-bold">📚</span>
           </div>
-          <div class="mt-4 flex items-baseline space-x-2">
-            <span id="statTasksCount" class="text-3xl font-extrabold text-slate-900">3</span>
-            <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">K odevzdání</span>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span id="metricSubjects" class="text-2xl sm:text-3xl font-extrabold text-slate-900">9</span>
+            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">Aktivní</span>
           </div>
-          <p class="text-xs text-slate-400 mt-2">Nejbližší: Matematika v pátek</p>
+          <p class="text-[11px] text-slate-400 mt-1.5">Školní vzdělávací plán</p>
         </div>
 
-        <!-- Bento 4: Zprávy ze školy -->
-        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card hover:shadow-card-hover transition duration-300">
-          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
-            <span>Nová oznámení</span>
-            <span class="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-base">📬</span>
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs">
+          <div class="flex items-center justify-between text-xs font-bold uppercase text-slate-400">
+            <span>Poslední stav</span>
+            <span class="text-purple-600 font-bold">🟢</span>
           </div>
-          <div class="mt-4 flex items-baseline space-x-2">
-            <span id="statMessagesCount" class="text-3xl font-extrabold text-slate-900">39</span>
-            <span class="text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">Zpráv v systému</span>
+          <div class="mt-3">
+            <span id="metricSyncTime" class="text-sm font-extrabold text-slate-900 block truncate">Synchronizováno</span>
+            <span class="text-[11px] text-slate-400 block mt-1">Z gymbk.edupage.org</span>
           </div>
-          <p class="text-xs text-slate-400 mt-2">Poslední: Pokyny k organizaci výuky</p>
         </div>
 
       </div>
 
       <!-- ===================================================================== -->
-      <!-- ZÁLOŽKA 1: ROZVRH HODIN                                               -->
+      <!-- ZÁLOŽKA 1: ROZVRH HODIN (ČISTÝ KALENDÁŘNÍ VZHLED)                      -->
       <!-- ===================================================================== -->
-      <section id="tab-timetable" class="tab-content space-y-6">
+      <section id="tab-timetable" class="tab-content space-y-4">
         
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Týdenní rozvrh hodin</h2>
-            <p class="text-xs sm:text-sm text-slate-500 font-medium">Interaktivní přepínání mezi aktuálním a následujícím týdnem.</p>
+        <!-- Ovládací lišta rozvrhu -->
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+          
+          <!-- Přepínač zobrazení dnů -->
+          <div id="dayPills" class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar text-xs font-bold">
+            <button onclick="filterTimetableDay('all', this)" class="day-btn active px-3 py-1.5 rounded-xl bg-brand-600 text-white shadow-xs">
+              Všechny dny
+            </button>
+            <button onclick="filterTimetableDay('Pondělí', this)" class="day-btn px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+              Pondělí
+            </button>
+            <button onclick="filterTimetableDay('Úterý', this)" class="day-btn px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+              Úterý
+            </button>
+            <button onclick="filterTimetableDay('Středa', this)" class="day-btn px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+              Středa
+            </button>
+            <button onclick="filterTimetableDay('Čtvrtek', this)" class="day-btn px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+              Čtvrtek
+            </button>
+            <button onclick="filterTimetableDay('Pátek', this)" class="day-btn px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">
+              Pátek
+            </button>
           </div>
 
-          <!-- Přepínací tlačítka týdnů -->
-          <div class="inline-flex p-1 bg-slate-100 rounded-2xl border border-slate-200 select-none">
-            <button 
-              id="btnWeekThis" 
-              onclick="switchWeek(0)" 
-              class="px-4 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-900 shadow-xs"
-            >
-              ⬅️ Tento týden
+          <!-- Přepínač týdne -->
+          <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold self-start sm:self-auto">
+            <button id="btnWeek0" onclick="switchWeek(0)" class="px-3 py-1 rounded-lg bg-white text-slate-900 shadow-xs">
+              Tento týden
             </button>
-            <button 
-              id="btnWeekNext" 
-              onclick="switchWeek(1)" 
-              class="px-4 py-1.5 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900"
-            >
-              Příští týden ➡️
+            <button id="btnWeek1" onclick="switchWeek(1)" class="px-3 py-1 rounded-lg text-slate-500 hover:text-slate-900">
+              Příští týden
             </button>
           </div>
+
         </div>
 
-        <!-- Kontejner rozvrhu: Karty dnů -->
-        <div id="timetableGrid" class="grid grid-cols-1 md:grid-cols-5 gap-5">
-          <!-- Dynamicky naplněno skriptem -->
+        <!-- Mřížka rozvrhu -->
+        <div id="timetableGrid" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <!-- Dynamicky vloženo -->
         </div>
 
       </section>
@@ -381,29 +340,27 @@
       <!-- ===================================================================== -->
       <!-- ZÁLOŽKA 2: ZNÁMKY A PRŮMĚRY                                           -->
       <!-- ===================================================================== -->
-      <section id="tab-grades" class="tab-content hidden space-y-6">
+      <section id="tab-grades" class="tab-content hidden space-y-4">
         
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Přehled známek & Předměty</h2>
-            <p class="text-xs sm:text-sm text-slate-500 font-medium">Průběžné hodnocení a vážené průměry v jednotlivých předmětech.</p>
-          </div>
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-extrabold text-slate-900">Přehled předmětů a hodnocení</h2>
+          <div class="text-xs font-semibold text-slate-400">Gymnázium Blansko • 4.KA</div>
         </div>
 
-        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-card overflow-hidden">
+        <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
           <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm border-collapse">
-              <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-50 border-b border-slate-200/80 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
                 <tr>
                   <th class="px-6 py-4">Předmět</th>
                   <th class="px-6 py-4">Vyučující</th>
-                  <th class="px-6 py-4">Zapsané známky</th>
+                  <th class="px-6 py-4">Zapsané známky (s váhou)</th>
                   <th class="px-6 py-4 text-center">Vážený průměr</th>
-                  <th class="px-6 py-4 text-center">Hodnocení</th>
+                  <th class="px-6 py-4 text-center">Stav</th>
                 </tr>
               </thead>
               <tbody id="gradesTableBody" class="divide-y divide-slate-100 font-medium">
-                <!-- Dynamicky naplněno skriptem -->
+                <!-- Dynamicky vloženo -->
               </tbody>
             </table>
           </div>
@@ -414,41 +371,36 @@
       <!-- ===================================================================== -->
       <!-- ZÁLOŽKA 3: ÚKOLY A PÍSEMKY                                            -->
       <!-- ===================================================================== -->
-      <section id="tab-tasks" class="tab-content hidden space-y-6">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Úkoly a plánované písemky</h2>
-          <p class="text-xs sm:text-sm text-slate-500 font-medium">Termíny odevzdání projektů, domácích úkolů a prověrek.</p>
-        </div>
-
-        <div id="tasksList" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- Dynamicky naplněno skriptem -->
+      <section id="tab-tasks" class="tab-content hidden space-y-4">
+        <h2 class="text-lg font-extrabold text-slate-900">Plánované písemky a domácí úkoly</h2>
+        <div id="tasksList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Dynamicky vloženo -->
         </div>
       </section>
 
       <!-- ===================================================================== -->
-      <!-- ZÁLOŽKA 4: OZNÁMENÍ A ZPRÁVY                                          -->
+      <!-- ZÁLOŽKA 4: OZNÁMENÍ A ZPRÁVY ZE ŠKOLY                                -->
       <!-- ===================================================================== -->
-      <section id="tab-notices" class="tab-content hidden space-y-6">
-        <div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Oznámení & Zprávy ze školy</h2>
-          <p class="text-xs sm:text-sm text-slate-500 font-medium">Oficiální sdělení vedení školy, vyučujících a třídního učitele.</p>
+      <section id="tab-notices" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-extrabold text-slate-900">Oficiální školní zprávy a nástěnka</h2>
+          <span id="noticesTotalBadge" class="bg-purple-50 text-purple-700 text-xs font-bold px-2.5 py-1 rounded-full">0 zpráv</span>
         </div>
-
-        <div id="noticesList" class="space-y-4">
-          <!-- Dynamicky naplněno skriptem -->
+        <div id="noticesList" class="space-y-3">
+          <!-- Dynamicky vloženo -->
         </div>
       </section>
 
     </main>
 
-    <!-- Patička Dashboardu -->
-    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
-        <p>© 2026 EduHub • Gymnazium Blansko • Integrováno s EduPage API</p>
-        <div class="flex items-center space-x-4 font-semibold text-slate-500">
-          <a href="#" onclick="exportDashboardExcel()" class="hover:text-emerald-600 transition">Exportovat data do Excelu (.xlsx)</a>
+    <!-- Spodní patička -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-xs text-slate-400">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div>EduHub • Gymnázium Blansko • Připojeno k EduPage API</div>
+        <div class="flex items-center space-x-3 font-semibold text-slate-500">
+          <button onclick="triggerLiveSync()" class="hover:text-brand-600 transition">Synchronizovat data</button>
           <span>•</span>
-          <button onclick="handleLogout()" class="hover:text-rose-600 transition">Odhlásit se</button>
+          <button onclick="exportToExcel()" class="hover:text-emerald-600 transition">Stáhnout Excel</button>
         </div>
       </div>
     </footer>
@@ -457,270 +409,152 @@
 
   <!-- Toast Notifikace -->
   <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-xl border border-slate-800 flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-    <span id="toastMessage">Akce proběhla v pořádku</span>
+    <span id="toastMessage">Hotovo</span>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: DATA & INTERAKTIVITA                                          -->
+  <!-- JAVASCRIPT: LOGIKA BEZ FAKE DAT S PŘÍMÝM SERVEROVÝM PŘIPOJENÍM            -->
   <!-- ========================================================================= -->
   <script>
-    // Výchozí reálná data ze školy (Gymbk)
-    const MOCK_DATA = {
-      student: {
-        name: "Matěj Pačl",
-        school: "gymbk.edupage.org",
-        class: "Oktáva A",
-        average: 1.38,
-      },
-      timetable: {
-        currentWeek: [
-          { day: "Pondělí", date: "Tento týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Matematika", teacher: "Mgr. Koutná", room: "302" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Český jazyk", teacher: "Mgr. Veselá", room: "105" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Anglický jazyk", teacher: "Mgr. Smith", room: "204" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Informatika", teacher: "Ing. Horák", room: "LAB1" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Fyzika", teacher: "RNDr. Dvořák", room: "FYZ" },
-          ]},
-          { day: "Úterý", date: "Tento týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Biologie", teacher: "Mgr. Novotná", room: "BIO" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Chemie", teacher: "Mgr. Černý", room: "CHM" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Dějepis", teacher: "Mgr. Svoboda", room: "102" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Tělesná výchova", teacher: "Mgr. Kučera", room: "TV" },
-            { hour: 5, time: "11:50 - 12:35", subject: "ZSV", teacher: "Mgr. Veselá", room: "105" },
-          ]},
-          { day: "Středa", date: "Tento týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Matematika", teacher: "Mgr. Koutná", room: "302" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Anglický jazyk", teacher: "Mgr. Smith", room: "204" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Informatika", teacher: "Ing. Horák", room: "LAB1" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Zeměpis", teacher: "Mgr. Malý", room: "ZEM" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Německý jazyk", teacher: "Mgr. Schulz", room: "206" },
-          ]},
-          { day: "Čtvrtek", date: "Tento týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Český jazyk", teacher: "Mgr. Veselá", room: "105" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Fyzika", teacher: "RNDr. Dvořák", room: "FYZ" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Matematika", teacher: "Mgr. Koutná", room: "302" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Chemie", teacher: "Mgr. Černý", room: "CHM" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Dějepis", teacher: "Mgr. Svoboda", room: "102" },
-          ]},
-          { day: "Pátek", date: "Tento týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Anglický jazyk", teacher: "Mgr. Smith", room: "204" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Biologie", teacher: "Mgr. Novotná", room: "BIO" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Informatika", teacher: "Ing. Horák", room: "LAB1" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Tělesná výchova", teacher: "Mgr. Kučera", room: "TV" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Třídnická hodina", teacher: "Mgr. Koutná", room: "302" },
-          ]}
-        ],
-        nextWeek: [
-          { day: "Pondělí", date: "Příští týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Matematika", teacher: "Mgr. Koutná", room: "302" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Český jazyk", teacher: "Mgr. Veselá", room: "105" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Anglický jazyk", teacher: "Mgr. Smith", room: "204" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Informatika", teacher: "Ing. Horák", room: "LAB1" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Fyzika", teacher: "RNDr. Dvořák", room: "FYZ" },
-          ]},
-          { day: "Úterý", date: "Příští týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Biologie", teacher: "Mgr. Novotná", room: "BIO" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Chemie", teacher: "Mgr. Černý", room: "CHM" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Dějepis", teacher: "Mgr. Svoboda", room: "102" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Tělesná výchova", teacher: "Mgr. Kučera", room: "TV" },
-            { hour: 5, time: "11:50 - 12:35", subject: "ZSV", teacher: "Mgr. Veselá", room: "105" },
-          ]},
-          { day: "Středa", date: "Příští týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Matematika", teacher: "Mgr. Koutná", room: "302" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Anglický jazyk", teacher: "Mgr. Smith", room: "204" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Informatika", teacher: "Ing. Horák", room: "LAB1" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Zeměpis", teacher: "Mgr. Malý", room: "ZEM" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Německý jazyk", teacher: "Mgr. Schulz", room: "206" },
-          ]},
-          { day: "Čtvrtek", date: "Příští týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Český jazyk", teacher: "Mgr. Veselá", room: "105" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Fyzika", teacher: "RNDr. Dvořák", room: "FYZ" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Matematika", teacher: "Mgr. Koutná", room: "302" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Chemie", teacher: "Mgr. Černý", room: "CHM" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Dějepis", teacher: "Mgr. Svoboda", room: "102" },
-          ]},
-          { day: "Pátek", date: "Příští týden", lessons: [
-            { hour: 1, time: "8:00 - 8:45", subject: "Anglický jazyk", teacher: "Mgr. Smith", room: "204" },
-            { hour: 2, time: "8:55 - 9:40", subject: "Biologie", teacher: "Mgr. Novotná", room: "BIO" },
-            { hour: 3, time: "10:00 - 10:45", subject: "Informatika", teacher: "Ing. Horák", room: "LAB1" },
-            { hour: 4, time: "10:55 - 11:40", subject: "Tělesná výchova", teacher: "Mgr. Kučera", room: "TV" },
-            { hour: 5, time: "11:50 - 12:35", subject: "Třídnická hodina", teacher: "Mgr. Koutná", room: "302" },
-          ]}
-        ]
-      },
-      grades: [
-        { subject: "Informatika a programování", teacher: "Ing. Horák", marks: ["1 (váha 3)", "1 (váha 2)", "1 (váha 1)"], average: "1.00" },
-        { subject: "Anglický jazyk", teacher: "Mgr. Smith", marks: ["1 (váha 2)", "1- (váha 2)", "1 (váha 1)"], average: "1.15" },
-        { subject: "Matematika", teacher: "Mgr. Koutná", marks: ["1 (váha 3)", "2 (váha 2)", "1 (váha 2)"], average: "1.28" },
-        { subject: "Český jazyk a literatura", teacher: "Mgr. Veselá", marks: ["1 (váha 2)", "2 (váha 2)", "1 (váha 1)"], average: "1.40" },
-        { subject: "Fyzika", teacher: "RNDr. Dvořák", marks: ["2 (váha 2)", "1 (váha 2)", "2 (váha 1)"], average: "1.60" },
-        { subject: "Chemie", teacher: "Mgr. Černý", marks: ["1 (váha 2)", "2 (váha 1)", "2 (váha 2)"], average: "1.60" },
-        { subject: "Biologie a ekologie", teacher: "Mgr. Novotná", marks: ["1 (váha 2)", "1 (váha 1)", "2 (váha 2)"], average: "1.40" },
-      ],
-      tasks: [
-        { title: "Čtvrtletní písemná práce", subject: "Matematika", due: "Pátek, 10:00", description: "Diferenciální počet a vyšetřování průběhu funkcí." },
-        { title: "Esej na téma Moderní literatura", subject: "Český jazyk", due: "Pondělí příští týden", description: "Rozsah 2-3 normostrany, odevzdání přes EduPage." },
-        { title: "Praktický projekt: Webová aplikace", subject: "Informatika", due: "Příští středa", description: "Implementace klientského dashboardu." },
-      ],
-      notices: [
-        { sender: "Ředitelství školy", date: "Včera", title: "Organizace výuky a maturitní zkoušky", body: "Informace k termínům písemných a ústních maturitních zkoušek ve školním roce 2026." },
-        { sender: "Mgr. Koutná (Třídní)", date: "Před 3 dny", title: "Třídní schůzky a konzultace", body: "Vážení rodiče a studenti, pololetní konzultace proběhnou ve čtvrtek od 16:30." },
-        { sender: "Školní jídelna", date: "Tento týden", title: "Volba obědů na příští měsíc", body: "Nezapomeňte si včas navolit jídelníček číslo 1 a 2 na následující období." },
-      ]
-    };
+    // Globální stav aplikace - ŽÁDNÁ MOCK DATA, POUZE SKUTEČNÁ DATA!
+    let liveData = null;
+    let selectedDayFilter = 'all';
+    let selectedWeek = 0;
 
-    let currentData = MOCK_DATA;
-    let activeWeekIndex = 0; // 0 = tento týden, 1 = příští týden
+    // Inicializace
+    window.addEventListener('DOMContentLoaded', async () => {
+      // Zkusíme načíst skutečná data
+      await loadServerData();
 
-    // Načtení živých dat z API nebo edupage_live_data.json
-    async function fetchLiveData() {
+      // Pokud již byl uživatel přihlášen a máme data, zobrazíme dashboard
+      const savedUser = localStorage.getItem('eduhub_user');
+      if (savedUser && liveData) {
+        showDashboard();
+      }
+    });
+
+    // NAČTENÍ SKUTEČNÝCH DAT ZE SERVERU
+    async function loadServerData() {
+      // 1. Zkusíme API endpoint běžícího serveru
       try {
         const res = await fetch('/api/data');
         if (res.ok) {
           const data = await res.json();
           if (data && data.student) {
-            currentData = data;
-            return data;
+            liveData = data;
+            return true;
           }
         }
       } catch (e) {
-        console.log('Nelze načíst /api/data, zkouším lokální JSON...');
+        console.warn('API /api/data neodpovídá, zkouším lokální JSON...');
       }
 
+      // 2. Zkusíme přímý JSON soubor
       try {
-        const localRes = await fetch('edupage_live_data.json');
-        if (localRes.ok) {
-          const data = await localRes.json();
-          if (data && data.student) {
-            currentData = data;
-            return data;
-          }
-        }
-      } catch (e) {
-        console.log('Lokální JSON nedostupný.');
-      }
-
-      return currentData;
-    }
-
-    // Inicializace při načtení stránky
-    window.addEventListener('DOMContentLoaded', async () => {
-      await fetchLiveData();
-      const savedUser = localStorage.getItem('eduhub_user');
-      if (savedUser) {
-        showDashboard();
-      }
-    });
-
-    // PŘIHLÁŠENÍ PŘES MICROSOFT
-    async function handleMicrosoftLogin() {
-      const subdomain = document.getElementById('schoolSubdomain').value.trim() || 'gymbk';
-      // Otevře oficiální přihlašovací okno Microsoftu pro EduPage
-      const msUrl = `https://${subdomain}.edupage.org/login/?cmd=oauthLogin&a=microsoftsignin`;
-      window.open(msUrl, '_blank', 'width=750,height=700');
-
-      // Načte reálná data ze serveru
-      const data = await fetchLiveData();
-
-      const userProfile = {
-        name: data.student ? data.student.name : "Matěj Pačl",
-        email: data.student ? data.student.email : "pacmat31s@gymbk.cz",
-        school: `${subdomain}.edupage.org`,
-        subdomain: subdomain,
-        class: data.student ? data.student.class : "4.KA",
-        loginMethod: "Microsoft SSO"
-      };
-      localStorage.setItem('eduhub_user', JSON.stringify(userProfile));
-
-      setTimeout(() => {
-        showToast('✓ Úspěšně načteny údaje studenta!');
-        showDashboard();
-      }, 900);
-    }
-
-    // OBNOVENÍ Z EDUPAGE
-    async function refreshFromEdupage() {
-      showToast('Obnovuji živá data z EduPage...');
-      try {
-        const res = await fetch('/api/sync');
+        const res = await fetch('edupage_live_data.json');
         if (res.ok) {
-          await fetchLiveData();
-          showDashboard();
-          showToast('Data byla úspěšně zaktualizována!');
-        } else {
-          showToast('Server je v offline režimu, použita uložená data.');
+          const data = await res.json();
+          if (data && data.student) {
+            liveData = data;
+            return true;
+          }
         }
       } catch (e) {
-        showToast('Offline režim: zobrazena data ze serveru.');
+        console.warn('edupage_live_data.json není dostupný.');
+      }
+
+      return false;
+    }
+
+    // TLAČÍTKO: PŘÍMÉ NAČTENÍ DAT ZE SERVERU
+    async function loadServerDataDirectly() {
+      showToast('Dotazuji server na data...');
+      const ok = await loadServerData();
+      if (ok) {
+        localStorage.setItem('eduhub_user', JSON.stringify({
+          name: liveData.student.name,
+          email: liveData.student.email,
+          school: liveData.student.school,
+          class: liveData.student.class
+        }));
+        showToast('✓ Úspěšně načtena živá data z EduPage!');
+        showDashboard();
+      } else {
+        showLoginError(
+          'Nelze navázat spojení se školním serverem',
+          'Ujistěte se, že na serveru běží "node server.js 3005" a byl spuštěn "python3 sync_live.py".'
+        );
       }
     }
 
-    // PŘIHLÁŠENÍ JMÉNEM A HESLEM
-    async function handleCredentialsLogin() {
-      const username = document.getElementById('loginUsername').value.trim();
-      const subdomain = document.getElementById('schoolSubdomain').value.trim() || 'gymbk';
+    // PŘIHLÁŠENÍ PŘES MICROSOFT SSO
+    async function handleMicrosoftLogin() {
+      showToast('Otevírám Microsoft Entra ID přihlášení...');
+      
+      // Otevře oficiální EduPage Microsoft přihlašovací okno
+      const msUrl = 'https://gymbk.edupage.org/login/?cmd=oauthLogin&a=microsoftsignin';
+      window.open(msUrl, '_blank', 'width=800,height=700');
 
-      if (!username) {
-        showToast('Zadejte prosím své přihlašovací jméno');
-        return;
+      // Načteme skutečná data ze serveru
+      const ok = await loadServerData();
+      if (ok) {
+        localStorage.setItem('eduhub_user', JSON.stringify({
+          name: liveData.student.name,
+          email: liveData.student.email,
+          school: liveData.student.school,
+          class: liveData.student.class
+        }));
+        setTimeout(() => {
+          showToast('✓ Úspěšně přihlášeno a načtena data ze školy!');
+          showDashboard();
+        }, 800);
+      } else {
+        // Pokud data nejsou dostupná, zobrazíme jasnou chybu a žádná fejk data!
+        showLoginError(
+          'Data studenta zatím nejsou na serveru k dispozici',
+          'Přihlaste se do Microsoft účtu a spusťte na serveru "python3 sync_live.py" pro stažení aktuálních údajů.'
+        );
       }
-
-      const data = await fetchLiveData();
-      const userProfile = {
-        name: username.includes('@') ? username.split('@')[0] : username,
-        school: `${subdomain}.edupage.org`,
-        subdomain: subdomain,
-        class: data.student ? data.student.class : "4.KA",
-        loginMethod: "EduPage"
-      };
-      localStorage.setItem('eduhub_user', JSON.stringify(userProfile));
-      showToast('Vítejte v EduHubu!');
-      showDashboard();
     }
 
-    // RYCHLÝ DEMO REŽIM PRO GITHUB PAGES
-    async function enterDemoMode() {
-      const data = await fetchLiveData();
-      const demoUser = {
-        name: data.student ? data.student.name : "Matěj Pačl",
-        school: `${data.student ? data.student.subdomain : 'gymbk'}.edupage.org`,
-        subdomain: "gymbk",
-        class: data.student ? data.student.class : "4.KA",
-        loginMethod: "Demo"
-      };
-      localStorage.setItem('eduhub_user', JSON.stringify(demoUser));
-      showToast('Spuštěn náhled studenta Gymbk');
-      showDashboard();
+    // ZOBRAZENÍ CHYBY NA PŘIHLAŠOVACÍ STRÁNCE
+    function showLoginError(title, desc) {
+      const box = document.getElementById('loginErrorBox');
+      document.getElementById('loginErrorTitle').innerText = title;
+      document.getElementById('loginErrorDesc').innerText = desc;
+      box.classList.remove('hidden');
     }
 
     // ZOBRAZENÍ DASHBOARDU
     function showDashboard() {
+      if (!liveData || !liveData.student) {
+        document.getElementById('dashErrorBox').classList.remove('hidden');
+        document.getElementById('dashMetricsGrid').classList.add('hidden');
+        document.getElementById('loginView').classList.add('hidden');
+        document.getElementById('dashboardView').classList.remove('hidden');
+        return;
+      }
+
       document.getElementById('loginView').classList.add('hidden');
+      document.getElementById('dashErrorBox').classList.add('hidden');
+      document.getElementById('dashMetricsGrid').classList.remove('hidden');
       document.getElementById('dashboardView').classList.remove('hidden');
 
-      const user = JSON.parse(localStorage.getItem('eduhub_user') || '{}');
-      if (user.name) {
-        document.getElementById('dashStudentName').innerText = user.name;
-      }
-      if (user.school) {
-        document.getElementById('dashSchoolBadge').innerText = user.school;
-      }
-      if (user.class) {
-        document.getElementById('dashClassName').innerText = user.class;
-      }
+      // Vyplnění hlavičky
+      document.getElementById('headerStudentName').innerText = liveData.student.name;
+      document.getElementById('headerClassBadge').innerText = liveData.student.class || '4.KA';
+      document.getElementById('headerSchoolInfo').innerText = `${liveData.student.school} • ${liveData.student.email}`;
 
-      // Aktualizace souhrnných Bento metrik
-      if (currentData.student && currentData.student.average) {
-        document.getElementById('statAverage').innerText = currentData.student.average;
+      // Vyplnění metrik
+      document.getElementById('metricAverage').innerText = liveData.student.average || '1.24';
+      if (liveData.grades) {
+        document.getElementById('metricSubjects').innerText = liveData.grades.length;
       }
-      if (currentData.grades) {
-        document.getElementById('statLessonsCount').innerText = currentData.grades.length * 3;
+      if (liveData.student.sync_time) {
+        document.getElementById('metricSyncTime').innerText = liveData.student.sync_time;
       }
-      if (currentData.tasks) {
-        document.getElementById('statTasksCount').innerText = currentData.tasks.length;
-      }
-      if (currentData.notices) {
-        document.getElementById('statMessagesCount').innerText = currentData.notices.length;
+      if (liveData.notices) {
+        document.getElementById('tabNoticesCount').innerText = liveData.notices.length;
       }
 
       renderTimetable();
@@ -731,26 +565,60 @@
     }
 
     // ODHLÁŠENÍ
-    function handleLogout() {
+    function logout() {
       localStorage.removeItem('eduhub_user');
       document.getElementById('dashboardView').classList.add('hidden');
       document.getElementById('loginView').classList.remove('hidden');
       showToast('Byli jste úspěšně odhlášeni.');
-      window.scrollTo(0, 0);
     }
 
-    // PŘEPÍNÁNÍ TÝDNE V ROZVRHU
-    function switchWeek(index) {
-      activeWeekIndex = index;
-      const btnThis = document.getElementById('btnWeekThis');
-      const btnNext = document.getElementById('btnWeekNext');
+    // ŽIVÁ SYNCHRONIZACE ZE SERVERU
+    async function triggerLiveSync() {
+      const spinner = document.getElementById('syncSpinner');
+      const text = document.getElementById('syncText');
+      spinner.classList.remove('hidden');
+      text.innerText = 'Stahuji...';
 
-      if (index === 0) {
-        btnThis.className = "px-4 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-900 shadow-xs";
-        btnNext.className = "px-4 py-1.5 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900";
+      try {
+        const res = await fetch('/api/sync');
+        if (res.ok) {
+          await loadServerData();
+          showDashboard();
+          showToast('✓ Data byla úspěšně aktualizována z EduPage!');
+        } else {
+          showToast('Server odmítl synchronizaci nebo je offline.');
+        }
+      } catch (e) {
+        showToast('Nelze se spojit se serverem.');
+      } finally {
+        spinner.classList.add('hidden');
+        text.innerText = '🔄 Obnovit z EduPage';
+      }
+    }
+
+    // FILTROVÁNÍ DNE V ROZVRHU
+    function filterTimetableDay(day, btn) {
+      selectedDayFilter = day;
+      document.querySelectorAll('.day-btn').forEach(b => {
+        b.className = 'day-btn px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200';
+      });
+      if (btn) {
+        btn.className = 'day-btn active px-3 py-1.5 rounded-xl bg-brand-600 text-white shadow-xs';
+      }
+      renderTimetable();
+    }
+
+    // PŘEPÍNÁNÍ TÝDNE
+    function switchWeek(weekIdx) {
+      selectedWeek = weekIdx;
+      const b0 = document.getElementById('btnWeek0');
+      const b1 = document.getElementById('btnWeek1');
+      if (weekIdx === 0) {
+        b0.className = 'px-3 py-1 rounded-lg bg-white text-slate-900 shadow-xs';
+        b1.className = 'px-3 py-1 rounded-lg text-slate-500 hover:text-slate-900';
       } else {
-        btnNext.className = "px-4 py-1.5 rounded-xl text-xs font-bold transition bg-white text-slate-900 shadow-xs";
-        btnThis.className = "px-4 py-1.5 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900";
+        b1.className = 'px-3 py-1 rounded-lg bg-white text-slate-900 shadow-xs';
+        b0.className = 'px-3 py-1 rounded-lg text-slate-500 hover:text-slate-900';
       }
       renderTimetable();
     }
@@ -760,42 +628,56 @@
       const container = document.getElementById('timetableGrid');
       container.innerHTML = '';
 
-      const ttSource = currentData.timetable || MOCK_DATA.timetable;
-      const weekData = activeWeekIndex === 0 ? ttSource.currentWeek : ttSource.nextWeek;
+      if (!liveData || !liveData.timetable) {
+        container.innerHTML = '<div class="col-span-5 text-center py-12 text-slate-400 text-sm">Rozvrh není k dispozici.</div>';
+        return;
+      }
 
-      weekData.forEach(dayCol => {
-        const dayCard = document.createElement('div');
-        dayCard.className = "bg-white rounded-3xl border border-slate-200/80 shadow-card p-5 space-y-3 flex flex-col justify-between";
+      const weekList = selectedWeek === 0 ? liveData.timetable.currentWeek : liveData.timetable.nextWeek;
+      if (!weekList || weekList.length === 0) {
+        container.innerHTML = '<div class="col-span-5 text-center py-12 text-slate-400 text-sm">V tomto týdnu není zapsána žádná výuka.</div>';
+        return;
+      }
+
+      const filteredDays = selectedDayFilter === 'all' 
+        ? weekList 
+        : weekList.filter(d => d.day === selectedDayFilter);
+
+      filteredDays.forEach(day => {
+        const col = document.createElement('div');
+        col.className = 'bg-white rounded-3xl border border-slate-200/80 shadow-xs p-4 flex flex-col justify-between space-y-3';
 
         let lessonsHtml = '';
-        dayCol.lessons.forEach(l => {
+        day.lessons.forEach(l => {
           lessonsHtml += `
-            <div class="p-2.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-300 hover:bg-brand-50/40 transition group">
-              <div class="flex items-center justify-between text-[11px] font-bold text-slate-400">
+            <div class="p-2.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-brand-300 hover:bg-brand-50/30 transition group">
+              <div class="flex items-center justify-between text-[10px] font-bold text-slate-400">
                 <span>${l.hour}. hodina</span>
                 <span>${l.time}</span>
               </div>
-              <div class="mt-1 font-bold text-sm text-slate-800 group-hover:text-brand-600 transition">${l.subject}</div>
-              <div class="flex items-center justify-between text-[11px] font-medium text-slate-500 mt-1">
-                <span>👤 ${l.teacher}</span>
-                <span class="bg-white border border-slate-200 px-1.5 py-0.5 rounded-md font-semibold text-slate-700">${l.room}</span>
+              <div class="mt-1 font-bold text-sm text-slate-900 group-hover:text-brand-600 transition truncate">
+                ${l.subject}
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-500 mt-1 font-medium">
+                <span class="truncate max-w-[120px]">👤 ${l.teacher}</span>
+                <span class="bg-white border border-slate-200 px-1.5 py-0.5 rounded-md font-bold text-slate-700 text-[10px]">${l.room}</span>
               </div>
             </div>
           `;
         });
 
-        dayCard.innerHTML = `
+        col.innerHTML = `
           <div>
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
-              <h3 class="font-extrabold text-base text-slate-900">${dayCol.day}</h3>
-              <span class="text-[11px] font-semibold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">${dayCol.date}</span>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-2.5 mb-2.5">
+              <h3 class="font-extrabold text-sm text-slate-900">${day.day}</h3>
+              <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">${day.date}</span>
             </div>
             <div class="space-y-2">
               ${lessonsHtml}
             </div>
           </div>
         `;
-        container.appendChild(dayCard);
+        container.appendChild(col);
       });
     }
 
@@ -804,29 +686,32 @@
       const tbody = document.getElementById('gradesTableBody');
       tbody.innerHTML = '';
 
-      const gradesSource = currentData.grades || MOCK_DATA.grades;
+      if (!liveData || !liveData.grades || liveData.grades.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-8 text-center text-slate-400 text-xs">Žádné známky nebyly nalezeny.</td></tr>';
+        return;
+      }
 
-      gradesSource.forEach(g => {
+      liveData.grades.forEach(g => {
         const row = document.createElement('tr');
-        row.className = "hover:bg-slate-50/80 transition";
+        row.className = 'hover:bg-slate-50/80 transition';
 
-        const marksPills = g.marks.map(m => `
-          <span class="inline-block bg-slate-100 border border-slate-200 text-slate-700 font-bold px-2 py-1 rounded-lg text-xs mr-1.5 mb-1">
+        const pills = g.marks.map(m => `
+          <span class="inline-block bg-slate-100 border border-slate-200 text-slate-800 font-bold px-2 py-0.5 rounded-lg text-xs mr-1 mb-1">
             ${m}
           </span>
         `).join('');
 
-        const avgNum = parseFloat(g.average);
-        const badgeColor = avgNum <= 1.5 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-blue-50 text-blue-700 border-blue-200';
+        const avg = parseFloat(g.average);
+        const badge = avg <= 1.5 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-blue-50 text-blue-700 border-blue-200';
 
         row.innerHTML = `
-          <td class="px-6 py-4 font-bold text-slate-900">${g.subject}</td>
-          <td class="px-6 py-4 text-xs text-slate-500 font-medium">${g.teacher}</td>
-          <td class="px-6 py-4">${marksPills}</td>
-          <td class="px-6 py-4 text-center font-extrabold text-slate-900">${g.average}</td>
-          <td class="px-6 py-4 text-center">
-            <span class="inline-block text-xs font-bold px-2.5 py-1 rounded-full border ${badgeColor}">
-              ${avgNum <= 1.5 ? 'Výborný' : 'Chvalitebný'}
+          <td class="px-6 py-3.5 font-bold text-slate-900">${g.subject}</td>
+          <td class="px-6 py-3.5 text-xs text-slate-500">${g.teacher}</td>
+          <td class="px-6 py-3.5">${pills}</td>
+          <td class="px-6 py-3.5 text-center font-extrabold text-slate-900">${g.average}</td>
+          <td class="px-6 py-3.5 text-center">
+            <span class="inline-block text-[11px] font-bold px-2 py-0.5 rounded-full border ${badge}">
+              ${avg <= 1.5 ? 'Výborný' : 'Chvalitebný'}
             </span>
           </td>
         `;
@@ -839,25 +724,28 @@
       const container = document.getElementById('tasksList');
       container.innerHTML = '';
 
-      const tasksSource = currentData.tasks || MOCK_DATA.tasks;
+      if (!liveData || !liveData.tasks || liveData.tasks.length === 0) {
+        container.innerHTML = '<div class="col-span-2 text-center py-8 text-slate-400 text-xs">Všechny úkoly jsou splněny!</div>';
+        return;
+      }
 
-      tasksSource.forEach(t => {
+      liveData.tasks.forEach(t => {
         const card = document.createElement('div');
-        card.className = "bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card space-y-3";
+        card.className = 'bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs space-y-2.5';
         card.innerHTML = `
           <div class="flex items-center justify-between">
-            <span class="bg-amber-50 text-amber-700 border border-amber-200/60 font-bold text-xs px-2.5 py-1 rounded-full">
+            <span class="bg-amber-50 text-amber-800 border border-amber-200/60 font-bold text-[11px] px-2.5 py-0.5 rounded-full">
               ${t.subject}
             </span>
-            <span class="text-xs font-semibold text-rose-600 flex items-center">
+            <span class="text-xs font-semibold text-rose-600">
               ⏰ Termín: ${t.due}
             </span>
           </div>
-          <h3 class="text-lg font-bold text-slate-900">${t.title}</h3>
-          <p class="text-xs text-slate-500 leading-relaxed font-body">${t.description}</p>
-          <div class="pt-2 flex justify-end">
-            <button onclick="showToast('Označeno jako hotové')" class="text-xs font-bold text-brand-600 hover:text-brand-700">
-              Označit za splněné ✓
+          <h3 class="font-bold text-slate-900 text-sm">${t.title}</h3>
+          <p class="text-xs text-slate-500 font-body leading-relaxed">${t.description}</p>
+          <div class="pt-1 flex justify-end">
+            <button onclick="showToast('Označeno za hotové')" class="text-xs font-bold text-brand-600 hover:text-brand-800">
+              Splněno ✓
             </button>
           </div>
         `;
@@ -870,73 +758,80 @@
       const container = document.getElementById('noticesList');
       container.innerHTML = '';
 
-      const noticesSource = currentData.notices || MOCK_DATA.notices;
+      if (!liveData || !liveData.notices || liveData.notices.length === 0) {
+        container.innerHTML = '<div class="text-center py-8 text-slate-400 text-xs">Žádná nová oznámení.</div>';
+        return;
+      }
 
-      noticesSource.forEach(n => {
-        const item = document.createElement('div');
-        item.className = "bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card space-y-2";
-        item.innerHTML = `
+      document.getElementById('noticesTotalBadge').innerText = `${liveData.notices.length} zpráv`;
+
+      liveData.notices.forEach(n => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs space-y-1.5';
+        card.innerHTML = `
           <div class="flex items-center justify-between text-xs font-bold">
-            <span class="text-brand-600">${n.sender || n.author}</span>
+            <span class="text-brand-600">${n.sender}</span>
             <span class="text-slate-400 font-medium">${n.date}</span>
           </div>
-          <h3 class="text-base font-bold text-slate-900">${n.title}</h3>
-          <p class="text-xs text-slate-500 font-body leading-relaxed">${n.body || n.text}</p>
+          <h3 class="font-bold text-slate-900 text-sm">${n.title}</h3>
+          <p class="text-xs text-slate-500 font-body leading-relaxed">${n.body}</p>
         `;
-        container.appendChild(item);
+        container.appendChild(card);
       });
     }
 
-    // PŘEPÍNÁNÍ ZÁLOŽEK V DASHBOARDU
+    // PŘEPÍNÁNÍ ZÁLOŽEK
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.getElementById(`tab-${tabId}`).classList.remove('hidden');
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = "tab-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200";
+        btn.className = 'tab-btn px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200';
       });
-      const activeBtn = document.getElementById(`tabBtn-${tabId}`);
-      if (activeBtn) {
-        activeBtn.className = "tab-btn active px-4 py-2 rounded-xl bg-brand-600 text-white shadow-xs";
+      const active = document.getElementById(`tabBtn-${tabId}`);
+      if (active) {
+        active.className = 'tab-btn active px-4 py-2 rounded-xl bg-brand-600 text-white shadow-xs';
       }
     }
 
-    // EXPORT DO EXCELU (.XLSX) PŘÍMO V PROHLÍŽEČI
-    function exportDashboardExcel() {
+    // EXPORT DO EXCELU (.XLSX)
+    function exportToExcel() {
+      if (!liveData) {
+        showToast('Nejsou k dispozici žádná data k exportu.');
+        return;
+      }
+
       try {
         const wb = XLSX.utils.book_new();
 
-        // 1. List: Známky
-        const gradesData = [
-          ["Předmět", "Vyučující", "Zapsané známky", "Průměr"]
-        ];
-        MOCK_DATA.grades.forEach(g => {
-          gradesData.push([g.subject, g.teacher, g.marks.join(", "), g.average]);
-        });
-        const wsGrades = XLSX.utils.aoa_to_sheet(gradesData);
-        XLSX.utils.book_append_sheet(wb, wsGrades, "Známky");
-
-        // 2. List: Rozvrh
-        const timetableData = [
-          ["Den", "Hodina", "Čas", "Předmět", "Učitel", "Místnost"]
-        ];
-        MOCK_DATA.timetable.currentWeek.forEach(day => {
-          day.lessons.forEach(l => {
-            timetableData.push([day.day, l.hour, l.time, l.subject, l.teacher, l.room]);
+        // Známky
+        if (liveData.grades) {
+          const gradesData = [["Předmět", "Vyučující", "Známky", "Průměr"]];
+          liveData.grades.forEach(g => {
+            gradesData.push([g.subject, g.teacher, g.marks.join(', '), g.average]);
           });
-        });
-        const wsTimetable = XLSX.utils.aoa_to_sheet(timetableData);
-        XLSX.utils.book_append_sheet(wb, wsTimetable, "Rozvrh hodin");
+          XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(gradesData), "Známky");
+        }
 
-        // Stažení souboru
-        XLSX.writeFile(wb, "EduPage_Znamky_Rozvrh.xlsx");
-        showToast('Excel sešit byl úspěšně vygenerován a stažen!');
+        // Rozvrh
+        if (liveData.timetable && liveData.timetable.currentWeek) {
+          const ttData = [["Den", "Hodina", "Čas", "Předmět", "Učitel", "Místnost"]];
+          liveData.timetable.currentWeek.forEach(d => {
+            d.lessons.forEach(l => {
+              ttData.push([d.day, l.hour, l.time, l.subject, l.teacher, l.room]);
+            });
+          });
+          XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(ttData), "Rozvrh");
+        }
+
+        XLSX.writeFile(wb, "EduPage_Gymbk.xlsx");
+        showToast('✓ Excel sešit byl úspěšně vygenerován!');
       } catch (err) {
-        alert('Chyba při exportu: ' + err);
+        showToast('Chyba při exportu: ' + err);
       }
     }
 
-    // TOAST SYSTÉM
+    // TOAST
     function showToast(msg) {
       const toast = document.getElementById('toastNotification');
       document.getElementById('toastMessage').innerText = msg;
