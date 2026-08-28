@@ -1,4 +1,4 @@
-# 🎓 EduHub — Školní Portál s Microsoft SSO & Dashboardem
+# 🎓 EduHub — Školní Portál s Dashboardem
 
 Moderní školní portál s čistým Bento Grid designem, přihlášením přes **Microsoft (Školní účet)** a studentským dashboardem.
 
