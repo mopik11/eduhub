@@ -1,8 +1,9 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || process.argv[2] || 3005;
 const PUBLIC_DIR = __dirname;
 
 const MIME_TYPES = {
@@ -19,12 +20,46 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let filePath = req.url.split('?')[0];
-  if (filePath === '/') {
-    filePath = '/index.html';
+  const urlParts = req.url.split('?');
+  const pathname = urlParts[0];
+
+  // API: Získání živých dat ze školy
+  if (pathname === '/api/data') {
+    const dataFile = path.join(PUBLIC_DIR, 'edupage_live_data.json');
+    fs.readFile(dataFile, 'utf8', (err, data) => {
+      if (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ error: 'Data file not found. Run sync_live.py first.' }));
+      }
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Access-Control-Allow-Origin': '*'
+      });
+      res.end(data);
+    });
+    return;
   }
 
+  // API: Spuštění synchronizace s EduPage
+  if (pathname === '/api/sync') {
+    console.log('[*] Požadavek na synchronizaci s EduPage...');
+    exec('python3 sync_live.py || python sync_live.py', (error, stdout, stderr) => {
+      if (error) {
+        console.error(`[!] Chyba synchronizace: ${error.message}`);
+        res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+        return res.end(JSON.stringify({ success: false, error: error.message }));
+      }
+      console.log(stdout);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: true, message: 'Synchronizováno s EduPage!' }));
+    });
+    return;
+  }
+
+  // Statické soubory
+  let filePath = pathname === '/' ? '/index.html' : pathname;
   const safePath = path.normalize(path.join(PUBLIC_DIR, filePath));
+
   if (!safePath.startsWith(PUBLIC_DIR)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     return res.end('403 Forbidden');
@@ -32,7 +67,6 @@ const server = http.createServer((req, res) => {
 
   fs.stat(safePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      // Fallback to index.html for SPA routing
       const fallbackPath = path.join(PUBLIC_DIR, 'index.html');
       fs.readFile(fallbackPath, (fallbackErr, content) => {
         if (fallbackErr) {
@@ -59,9 +93,19 @@ const server = http.createServer((req, res) => {
   });
 });
 
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n[!] Port ${PORT} je již obsazen jinou aplikací.`);
+    console.error(`    Můžete zadat jiný port: node server.js <port> (např. node server.js 3005)\n`);
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});
+
 server.listen(PORT, () => {
   console.log(`========================================`);
-  console.log(`  🎓 EduHub Server is running!`);
-  console.log(`  🌐 Local: http://localhost:${PORT}`);
+  console.log(`  🎓 EduHub Server běží!`);
+  console.log(`  🌐 Lokálně: http://localhost:${PORT}`);
   console.log(`========================================`);
 });

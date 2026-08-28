@@ -232,15 +232,24 @@
         </div>
 
         <!-- Akční tlačítka v liště -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <!-- Tlačítko pro živou synchronizaci -->
+          <button 
+            onclick="refreshFromEdupage()" 
+            class="inline-flex items-center space-x-1.5 bg-brand-50 hover:bg-brand-100 border border-brand-200 text-brand-700 text-xs sm:text-sm font-bold px-3 py-2 rounded-xl transition shadow-xs"
+            title="Aktualizovat nejnovější data z EduPage"
+          >
+            <span>🔄 Obnovit z EduPage</span>
+          </button>
+
           <!-- Tlačítko na export do Excelu -->
           <button 
             onclick="exportDashboardExcel()" 
-            class="inline-flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-xl transition shadow-xs"
+            class="inline-flex items-center space-x-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold px-3 py-2 rounded-xl transition shadow-xs"
             title="Stáhnout kompletní sešit se známkami a rozvrhem"
           >
             <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            <span>Stáhnout Excel</span>
+            <span class="hidden sm:inline">Stáhnout Excel</span>
           </button>
 
           <!-- Tlačítko odhlášení -->
@@ -560,10 +569,43 @@
       ]
     };
 
+    let currentData = MOCK_DATA;
     let activeWeekIndex = 0; // 0 = tento týden, 1 = příští týden
 
+    // Načtení živých dat z API nebo edupage_live_data.json
+    async function fetchLiveData() {
+      try {
+        const res = await fetch('/api/data');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.student) {
+            currentData = data;
+            return data;
+          }
+        }
+      } catch (e) {
+        console.log('Nelze načíst /api/data, zkouším lokální JSON...');
+      }
+
+      try {
+        const localRes = await fetch('edupage_live_data.json');
+        if (localRes.ok) {
+          const data = await localRes.json();
+          if (data && data.student) {
+            currentData = data;
+            return data;
+          }
+        }
+      } catch (e) {
+        console.log('Lokální JSON nedostupný.');
+      }
+
+      return currentData;
+    }
+
     // Inicializace při načtení stránky
-    window.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', async () => {
+      await fetchLiveData();
       const savedUser = localStorage.getItem('eduhub_user');
       if (savedUser) {
         showDashboard();
@@ -571,28 +613,52 @@
     });
 
     // PŘIHLÁŠENÍ PŘES MICROSOFT
-    function handleMicrosoftLogin() {
+    async function handleMicrosoftLogin() {
       const subdomain = document.getElementById('schoolSubdomain').value.trim() || 'gymbk';
-      showToast('Ověřuji školní Microsoft SSO účet...');
+      showToast('Otevírám Microsoft SSO přihlášení...');
       
-      // Simulace bezpečného přihlášení přes Microsoft Entra ID / EduPage SSO
+      // Otevře oficiální přihlašovací okno Microsoftu pro EduPage
+      const msUrl = `https://${subdomain}.edupage.org/login/edupage?msLogin=1`;
+      window.open(msUrl, '_blank', 'width=750,height=700');
+
+      // Načte reálná data ze serveru
+      const data = await fetchLiveData();
+
+      const userProfile = {
+        name: data.student ? data.student.name : "Matěj Pačl",
+        email: data.student ? data.student.email : "pacmat31s@gymbk.cz",
+        school: `${subdomain}.edupage.org`,
+        subdomain: subdomain,
+        class: data.student ? data.student.class : "4.KA",
+        loginMethod: "Microsoft SSO"
+      };
+      localStorage.setItem('eduhub_user', JSON.stringify(userProfile));
+
       setTimeout(() => {
-        const userProfile = {
-          name: "Matěj Pačl",
-          email: "pacl.matej@gymbk.cz",
-          school: `${subdomain}.edupage.org`,
-          subdomain: subdomain,
-          loginMethod: "Microsoft SSO",
-          token: "ms_sso_" + Math.random().toString(36).substring(2)
-        };
-        localStorage.setItem('eduhub_user', JSON.stringify(userProfile));
-        showToast('Úspěšně přihlášen přes Microsoft!');
+        showToast('✓ Úspěšně načteny údaje studenta!');
         showDashboard();
-      }, 700);
+      }, 900);
+    }
+
+    // OBNOVENÍ Z EDUPAGE
+    async function refreshFromEdupage() {
+      showToast('Obnovuji živá data z EduPage...');
+      try {
+        const res = await fetch('/api/sync');
+        if (res.ok) {
+          await fetchLiveData();
+          showDashboard();
+          showToast('Data byla úspěšně zaktualizována!');
+        } else {
+          showToast('Server je v offline režimu, použita uložená data.');
+        }
+      } catch (e) {
+        showToast('Offline režim: zobrazena data ze serveru.');
+      }
     }
 
     // PŘIHLÁŠENÍ JMÉNEM A HESLEM
-    function handleCredentialsLogin() {
+    async function handleCredentialsLogin() {
       const username = document.getElementById('loginUsername').value.trim();
       const subdomain = document.getElementById('schoolSubdomain').value.trim() || 'gymbk';
 
@@ -601,12 +667,13 @@
         return;
       }
 
+      const data = await fetchLiveData();
       const userProfile = {
         name: username.includes('@') ? username.split('@')[0] : username,
         school: `${subdomain}.edupage.org`,
         subdomain: subdomain,
-        loginMethod: "EduPage",
-        token: "edupage_" + Math.random().toString(36).substring(2)
+        class: data.student ? data.student.class : "4.KA",
+        loginMethod: "EduPage"
       };
       localStorage.setItem('eduhub_user', JSON.stringify(userProfile));
       showToast('Vítejte v EduHubu!');
@@ -614,13 +681,14 @@
     }
 
     // RYCHLÝ DEMO REŽIM PRO GITHUB PAGES
-    function enterDemoMode() {
+    async function enterDemoMode() {
+      const data = await fetchLiveData();
       const demoUser = {
-        name: "Matěj Pačl",
-        school: "gymbk.edupage.org",
+        name: data.student ? data.student.name : "Matěj Pačl",
+        school: `${data.student ? data.student.subdomain : 'gymbk'}.edupage.org`,
         subdomain: "gymbk",
-        loginMethod: "Demo",
-        token: "demo_token_123"
+        class: data.student ? data.student.class : "4.KA",
+        loginMethod: "Demo"
       };
       localStorage.setItem('eduhub_user', JSON.stringify(demoUser));
       showToast('Spuštěn náhled studenta Gymbk');
@@ -638,6 +706,23 @@
       }
       if (user.school) {
         document.getElementById('dashSchoolBadge').innerText = user.school;
+      }
+      if (user.class) {
+        document.getElementById('dashClassName').innerText = user.class;
+      }
+
+      // Aktualizace souhrnných Bento metrik
+      if (currentData.student && currentData.student.average) {
+        document.getElementById('statAverage').innerText = currentData.student.average;
+      }
+      if (currentData.grades) {
+        document.getElementById('statLessonsCount').innerText = currentData.grades.length * 3;
+      }
+      if (currentData.tasks) {
+        document.getElementById('statTasksCount').innerText = currentData.tasks.length;
+      }
+      if (currentData.notices) {
+        document.getElementById('statMessagesCount').innerText = currentData.notices.length;
       }
 
       renderTimetable();
@@ -677,7 +762,8 @@
       const container = document.getElementById('timetableGrid');
       container.innerHTML = '';
 
-      const weekData = activeWeekIndex === 0 ? MOCK_DATA.timetable.currentWeek : MOCK_DATA.timetable.nextWeek;
+      const ttSource = currentData.timetable || MOCK_DATA.timetable;
+      const weekData = activeWeekIndex === 0 ? ttSource.currentWeek : ttSource.nextWeek;
 
       weekData.forEach(dayCol => {
         const dayCard = document.createElement('div');
@@ -720,7 +806,9 @@
       const tbody = document.getElementById('gradesTableBody');
       tbody.innerHTML = '';
 
-      MOCK_DATA.grades.forEach(g => {
+      const gradesSource = currentData.grades || MOCK_DATA.grades;
+
+      gradesSource.forEach(g => {
         const row = document.createElement('tr');
         row.className = "hover:bg-slate-50/80 transition";
 
@@ -753,7 +841,9 @@
       const container = document.getElementById('tasksList');
       container.innerHTML = '';
 
-      MOCK_DATA.tasks.forEach(t => {
+      const tasksSource = currentData.tasks || MOCK_DATA.tasks;
+
+      tasksSource.forEach(t => {
         const card = document.createElement('div');
         card.className = "bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card space-y-3";
         card.innerHTML = `
@@ -782,16 +872,18 @@
       const container = document.getElementById('noticesList');
       container.innerHTML = '';
 
-      MOCK_DATA.notices.forEach(n => {
+      const noticesSource = currentData.notices || MOCK_DATA.notices;
+
+      noticesSource.forEach(n => {
         const item = document.createElement('div');
         item.className = "bg-white rounded-3xl p-6 border border-slate-200/80 shadow-card space-y-2";
         item.innerHTML = `
           <div class="flex items-center justify-between text-xs font-bold">
-            <span class="text-brand-600">${n.sender}</span>
+            <span class="text-brand-600">${n.sender || n.author}</span>
             <span class="text-slate-400 font-medium">${n.date}</span>
           </div>
           <h3 class="text-base font-bold text-slate-900">${n.title}</h3>
-          <p class="text-xs text-slate-500 font-body leading-relaxed">${n.body}</p>
+          <p class="text-xs text-slate-500 font-body leading-relaxed">${n.body || n.text}</p>
         `;
         container.appendChild(item);
       });

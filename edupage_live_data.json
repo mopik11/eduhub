@@ -1,0 +1,630 @@
+{
+  "student": {
+    "name": "Matěj Pačl",
+    "email": "pacmat31s@gymbk.cz",
+    "school": "gymbk.edupage.org",
+    "subdomain": "gymbk",
+    "class": "3.TA",
+    "average": "1.24",
+    "sync_time": "29.08.2026 00:19:52"
+  },
+  "timetable": {
+    "currentWeek": [
+      {
+        "day": "Pondělí",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Matematika",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Český jazyk",
+            "teacher": "Mgr. Radka Veselá",
+            "room": "105"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Anglický jazyk",
+            "teacher": "Mgr. David Smith",
+            "room": "204"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Informatika",
+            "teacher": "Ing. Petr Horák",
+            "room": "LAB1"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Fyzika",
+            "teacher": "RNDr. Jan Dvořák",
+            "room": "FYZ"
+          }
+        ]
+      },
+      {
+        "day": "Úterý",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Biologie",
+            "teacher": "Mgr. Eva Novotná",
+            "room": "BIO"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Chemie",
+            "teacher": "Mgr. Tomáš Černý",
+            "room": "CHM"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Dějepis",
+            "teacher": "Mgr. Martin Svoboda",
+            "room": "102"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Tělesná výchova",
+            "teacher": "Mgr. Jan Kučera",
+            "room": "TV"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "ZSV",
+            "teacher": "Mgr. Radka Veselá",
+            "room": "105"
+          }
+        ]
+      },
+      {
+        "day": "Středa",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Matematika",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Anglický jazyk",
+            "teacher": "Mgr. David Smith",
+            "room": "204"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Informatika",
+            "teacher": "Ing. Petr Horák",
+            "room": "LAB1"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Zeměpis",
+            "teacher": "Mgr. Petr Malý",
+            "room": "ZEM"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Německý jazyk",
+            "teacher": "Mgr. Anna Schulz",
+            "room": "206"
+          }
+        ]
+      },
+      {
+        "day": "Čtvrtek",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Český jazyk",
+            "teacher": "Mgr. Radka Veselá",
+            "room": "105"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Fyzika",
+            "teacher": "RNDr. Jan Dvořák",
+            "room": "FYZ"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Matematika",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Chemie",
+            "teacher": "Mgr. Tomáš Černý",
+            "room": "CHM"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Dějepis",
+            "teacher": "Mgr. Martin Svoboda",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "Pátek",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Anglický jazyk",
+            "teacher": "Mgr. David Smith",
+            "room": "204"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Biologie",
+            "teacher": "Mgr. Eva Novotná",
+            "room": "BIO"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Informatika",
+            "teacher": "Ing. Petr Horák",
+            "room": "LAB1"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Tělesná výchova",
+            "teacher": "Mgr. Jan Kučera",
+            "room": "TV"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Třídnická hodina",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          }
+        ]
+      }
+    ],
+    "nextWeek": [
+      {
+        "day": "Pondělí",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Matematika",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Český jazyk",
+            "teacher": "Mgr. Radka Veselá",
+            "room": "105"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Anglický jazyk",
+            "teacher": "Mgr. David Smith",
+            "room": "204"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Informatika",
+            "teacher": "Ing. Petr Horák",
+            "room": "LAB1"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Fyzika",
+            "teacher": "RNDr. Jan Dvořák",
+            "room": "FYZ"
+          }
+        ]
+      },
+      {
+        "day": "Úterý",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Biologie",
+            "teacher": "Mgr. Eva Novotná",
+            "room": "BIO"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Chemie",
+            "teacher": "Mgr. Tomáš Černý",
+            "room": "CHM"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Dějepis",
+            "teacher": "Mgr. Martin Svoboda",
+            "room": "102"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Tělesná výchova",
+            "teacher": "Mgr. Jan Kučera",
+            "room": "TV"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "ZSV",
+            "teacher": "Mgr. Radka Veselá",
+            "room": "105"
+          }
+        ]
+      },
+      {
+        "day": "Středa",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Matematika",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Anglický jazyk",
+            "teacher": "Mgr. David Smith",
+            "room": "204"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Informatika",
+            "teacher": "Ing. Petr Horák",
+            "room": "LAB1"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Zeměpis",
+            "teacher": "Mgr. Petr Malý",
+            "room": "ZEM"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Německý jazyk",
+            "teacher": "Mgr. Anna Schulz",
+            "room": "206"
+          }
+        ]
+      },
+      {
+        "day": "Čtvrtek",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Český jazyk",
+            "teacher": "Mgr. Radka Veselá",
+            "room": "105"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Fyzika",
+            "teacher": "RNDr. Jan Dvořák",
+            "room": "FYZ"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Matematika",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Chemie",
+            "teacher": "Mgr. Tomáš Černý",
+            "room": "CHM"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Dějepis",
+            "teacher": "Mgr. Martin Svoboda",
+            "room": "102"
+          }
+        ]
+      },
+      {
+        "day": "Pátek",
+        "date": "Tento týden",
+        "lessons": [
+          {
+            "hour": 1,
+            "time": "8:00 - 8:45",
+            "subject": "Anglický jazyk",
+            "teacher": "Mgr. David Smith",
+            "room": "204"
+          },
+          {
+            "hour": 2,
+            "time": "8:55 - 9:40",
+            "subject": "Biologie",
+            "teacher": "Mgr. Eva Novotná",
+            "room": "BIO"
+          },
+          {
+            "hour": 3,
+            "time": "10:00 - 10:45",
+            "subject": "Informatika",
+            "teacher": "Ing. Petr Horák",
+            "room": "LAB1"
+          },
+          {
+            "hour": 4,
+            "time": "10:55 - 11:40",
+            "subject": "Tělesná výchova",
+            "teacher": "Mgr. Jan Kučera",
+            "room": "TV"
+          },
+          {
+            "hour": 5,
+            "time": "11:50 - 12:35",
+            "subject": "Třídnická hodina",
+            "teacher": "Mgr. Lenka Koutná",
+            "room": "302"
+          }
+        ]
+      }
+    ]
+  },
+  "grades": [
+    {
+      "subject": "Český jazyk a literatura",
+      "teacher": "Mgr. Radka Veselá",
+      "marks": [
+        "1 (váha 3)",
+        "1 (váha 2)",
+        "2 (váha 1)"
+      ],
+      "average": "1.25"
+    },
+    {
+      "subject": "Anglický jazyk",
+      "teacher": "Mgr. David Smith",
+      "marks": [
+        "1 (váha 2)",
+        "1- (váha 2)",
+        "1 (váha 1)"
+      ],
+      "average": "1.10"
+    },
+    {
+      "subject": "Matematika",
+      "teacher": "Mgr. Lenka Koutná",
+      "marks": [
+        "1 (váha 3)",
+        "2 (váha 2)",
+        "1 (váha 2)"
+      ],
+      "average": "1.28"
+    },
+    {
+      "subject": "Informatika a výpočetní technika",
+      "teacher": "Ing. Petr Horák",
+      "marks": [
+        "1 (váha 3)",
+        "1 (váha 2)",
+        "1 (váha 2)"
+      ],
+      "average": "1.00"
+    },
+    {
+      "subject": "Fyzika",
+      "teacher": "RNDr. Jan Dvořák",
+      "marks": [
+        "2 (váha 2)",
+        "1 (váha 2)",
+        "1 (váha 1)"
+      ],
+      "average": "1.40"
+    },
+    {
+      "subject": "Chemie",
+      "teacher": "Mgr. Tomáš Černý",
+      "marks": [
+        "1 (váha 2)",
+        "2 (váha 1)",
+        "2 (váha 2)"
+      ],
+      "average": "1.60"
+    },
+    {
+      "subject": "Biologie a ekologie",
+      "teacher": "Mgr. Eva Novotná",
+      "marks": [
+        "1 (váha 2)",
+        "1 (váha 1)",
+        "2 (váha 2)"
+      ],
+      "average": "1.35"
+    },
+    {
+      "subject": "Dějepis",
+      "teacher": "Mgr. Martin Svoboda",
+      "marks": [
+        "1 (váha 2)",
+        "1 (váha 1)",
+        "2 (váha 1)"
+      ],
+      "average": "1.20"
+    },
+    {
+      "subject": "Základy společenských věd",
+      "teacher": "Mgr. Radka Veselá",
+      "marks": [
+        "1 (váha 1)",
+        "1 (váha 1)"
+      ],
+      "average": "1.00"
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Diferenciální počet – cvičení",
+      "subject": "Matematika",
+      "due": "Pátek 10:00",
+      "description": "Vyřešit příklady 12 až 20 ze sbírky úloh."
+    },
+    {
+      "title": "Esej: Čtenářský deník 20. století",
+      "subject": "Český jazyk",
+      "due": "Příští pondělí",
+      "description": "Minimální rozsah 2 normostrany, odevzdání přes EduPage."
+    },
+    {
+      "title": "Projekt v Pythonu: EduHub API",
+      "subject": "Informatika",
+      "due": "Středa",
+      "description": "Odevzdat odkaz na GitHub repozitář s funkčním serverem."
+    }
+  ],
+  "notices": [
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-28",
+      "title": "Zverejnený nový rozvrh",
+      "body": "Zverejnený nový rozvrh"
+    },
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Lenka Suchá",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Lenka Suchá",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Lenka Suchá",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Lenka Suchá",
+      "date": "2026-08-28",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Lukáš Gábr",
+      "date": "2026-08-26",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Lukáš Gábr",
+      "date": "2026-08-26",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Vladimír Šenkýř",
+      "date": "2026-08-26",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Stanislav Hrnčíř",
+      "date": "2026-08-26",
+      "title": "Školní oznámení",
+      "body": "Podrobnosti zprávy v systému EduPage."
+    },
+    {
+      "sender": "Administrátor",
+      "date": "2026-08-26",
+      "title": "Na stránku bylo nahráno nové suplování",
+      "body": "Na stránku bylo nahráno nové suplování"
+    }
+  ]
+}
